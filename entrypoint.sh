@@ -301,6 +301,11 @@ extract_json_data() {
 	cls=$(echo "$json_data" | jq -r '.audits."cumulative-layout-shift".displayValue')
 	si=$(echo "$json_data" | jq -r '.audits."speed-index".displayValue')
 	performance=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .summary.performance')
+	
+ 	htmlPath=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .htmlPath')
+  	report=$(cat "$html_path")
+
+ 	log "report: $report"
 
 
         # Append the data to the array
