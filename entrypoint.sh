@@ -304,7 +304,7 @@ extract_json_data() {
 	
   
 	    # Replace the .json extension with .html to get the corresponding HTML file path
-	    html_file="${json_file%.json}.html"
+	    html_file="${file%.json}.html"
 	
 	    # Read the content of the HTML file and store it in the variable 'html_content'
 	    html_content=$(cat "$html_file")
