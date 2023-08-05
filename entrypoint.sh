@@ -255,7 +255,8 @@ log "Running lighthouse Step 1"
 step "Running Lighthouse CI"
 lhci autorun
 
-git branch 
+git remote -v
+ 
 step "Opening the report file"
 cat /github/workspace/reports/manifest.json
 
