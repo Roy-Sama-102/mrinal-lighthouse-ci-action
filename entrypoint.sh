@@ -302,10 +302,14 @@ extract_json_data() {
 	si=$(echo "$json_data" | jq -r '.audits."speed-index".displayValue')
 	performance=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .summary.performance')
 	
- 	html_path=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .htmlPath')
-  	report=$(cat "$html_path")
+  
+	    # Replace the .json extension with .html to get the corresponding HTML file path
+	    html_file="${json_file%.json}.html"
+	
+	    # Read the content of the HTML file and store it in the variable 'html_content'
+	    html_content=$(cat "$html_file")
 
- 	log "report: $report"
+	log "html_content: $html_content"
 
 
         # Append the data to the array
