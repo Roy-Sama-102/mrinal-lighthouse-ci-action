@@ -256,11 +256,10 @@ step "Running Lighthouse CI"
 lhci autorun
 
 git remote -v
-git config user.name
-git config user.email
  
 step "Opening the report file"
 cat /github/workspace/reports/manifest.json
+ls /
 
 # Function to extract JSON data from the files and create the desired structure
 extract_json_data() {
@@ -372,3 +371,45 @@ ls /github/workspace/reports/
 
 # Call the function to upload data to Google Sheet
 upload_to_google_sheet
+
+#!/usr/bin/env bash
+
+####################################################################
+# Function to Move Reports to Main Branch
+
+move_reports_to_main_branch() {
+  # Update this path to the desired location in the main branch
+  MAIN_BRANCH_REPORTS_DIR=".github/reports"
+
+  # After running Lighthouse CI, move the reports to the main branch directory
+  step "Moving reports to the main branch directory"
+
+  # Create the main branch reports directory if it doesn't exist
+  mkdir -p "$MAIN_BRANCH_REPORTS_DIR"
+
+  # Move the reports from the workspace directory to the main branch directory
+  mv /github/workspace/reports/* "$MAIN_BRANCH_REPORTS_DIR/"
+
+  # Change to the main repository directory
+  pushd "/github/workspace"
+
+  # Commit and push the changes directly to the main branch
+  git config user.name "Your GitHub Username"
+  git config user.email "your-email@example.com"
+  git add -A "$MAIN_BRANCH_REPORTS_DIR"
+  git commit -m "Move reports to .github/reports directory"
+  git push origin HEAD:main
+
+  # Pop back to the original directory
+  popd
+
+  # ... (Your existing code)
+}
+
+####################################################################
+
+# Call the function to move the reports to the main branch
+move_reports_to_main_branch
+
+
+
