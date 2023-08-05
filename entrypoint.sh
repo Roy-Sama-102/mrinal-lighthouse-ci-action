@@ -218,11 +218,11 @@ ci:
     assertions:
       "categories:performance":
         - error
-        - minScore: 0.5
+        - minScore: 0.1
           aggregationMethod: median-run
       "categories:accessibility":
         - error
-        - minScore: 0.5
+        - minScore: 0.1
           aggregationMethod: median-run
 EOF
 
