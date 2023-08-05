@@ -302,18 +302,15 @@ extract_json_data() {
 	si=$(echo "$json_data" | jq -r '.audits."speed-index".displayValue')
 	performance=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .summary.performance')
 	
-  
-	    # Replace the .json extension with .html to get the corresponding HTML file path
-	    html_file="${file%.json}.html"
-	
-	    # Read the content of the HTML file and store it in the variable 'html_content'
-	    html_content=$(cat "$html_file")
+        # Replace the .json extension with .html to get the corresponding HTML file path
+        html_file="${file%.json}.html"
 
-	log "html_content: $html_content"
+        # Read the content of the HTML file and store it in the variable 'html_content'
+        html_content=$(cat "$html_file")
 
 
         # Append the data to the array
-	data_array+=("{\"Page\": \"$page_type\", \"Requested Url\": \"$requestedUrl\", \"Performance\": $performance, \"First Contentful Paint\": \"$fcp\", \"Largest Contentful Paint\": \"$lcp\", \"Total Blocking Time\": \"$tbt\", \"Cumulative Layout Shift\": \"$cls\", \"Speed Index\": \"$si\", \"Event Info\": \"$event_info\"}")
+	data_array+=("{\"Page\": \"$page_type\", \"Requested Url\": \"$requestedUrl\", \"Performance\": $performance, \"First Contentful Paint\": \"$fcp\", \"Largest Contentful Paint\": \"$lcp\", \"Total Blocking Time\": \"$tbt\", \"Cumulative Layout Shift\": \"$cls\", \"Speed Index\": \"$si\", \"Event Info\": \"$event_info\", \"HTML content\": \"$html_content\"}")
 
  	# log "data_array: $data_array"
     done
