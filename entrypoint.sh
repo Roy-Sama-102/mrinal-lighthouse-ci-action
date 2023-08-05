@@ -393,11 +393,23 @@ move_reports_to_empty_branch() {
   # ls -a
 
   # # Commit the changes directly to the reports branch
+  remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+  git config http.sslVerify false
   git config user.name "RoyMarmeto"
   git config user.email "mrinal@marmeto.com"
+  git remote add publisher "${remote_repo}"
+  git show-ref # useful for debugging
+  git branch --verbose
 
   git add .
   git commit -m 'initial commit'
+
+  git checkout -b ${REPORTS_BRANCH}
+	git add -A
+	timestamp=$(date -u)
+	git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
+	git pull --rebase publisher ${REPORTS_BRANCH}
+	git push publisher ${REPORTS_BRANCH}
 
   # step "Staging all files"
 
