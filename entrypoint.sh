@@ -388,7 +388,7 @@ move_reports_to_main_branch() {
   REPORTS_BRANCH="lighthouse-reports"
 
   # Create the reports branch if it doesn't exist
-  git checkout -B "$REPORTS_BRANCH"
+  git checkout --orphan "$REPORTS_BRANCH"
 
   # Move the reports from the workspace directory to the main repository
   mv /github/workspace/reports/* .
@@ -400,9 +400,9 @@ move_reports_to_main_branch() {
   git config user.name "RoyMarmeto"
   git config user.email "mrinal@marmeto.com"
 
+  git branch
   ls -a 
   git status
-  git branch
 
 
   git add -A "$MAIN_BRANCH_REPORTS_DIR"
