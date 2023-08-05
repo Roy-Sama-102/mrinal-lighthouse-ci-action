@@ -379,7 +379,7 @@ move_reports_to_empty_branch() {
   REPORTS_BRANCH="lighthouse-reports"
 
   # Create the empty branch for storing the reports
-  git checkout --orphan "$REPORTS_BRANCH"
+  git checkout -b "$REPORTS_BRANCH"
   # git rm -rf .
 
   # Move the reports from the workspace directory to the main repository
