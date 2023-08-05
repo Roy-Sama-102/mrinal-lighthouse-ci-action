@@ -379,7 +379,7 @@ move_reports_to_empty_branch() {
   REPORTS_BRANCH="lighthouse-reports"
 
   # Create the empty branch for storing the reports
-  git checkout -b "$REPORTS_BRANCH"
+  # git checkout -b "$REPORTS_BRANCH"
 
   # # git rm -rf .
 
