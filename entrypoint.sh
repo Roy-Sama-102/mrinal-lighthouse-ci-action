@@ -374,60 +374,42 @@ upload_to_google_sheet
 ####################################################################
 # Function to Move Reports to Main Branch
 
-move_reports_to_main_branch() {
-  # Update this path to the desired location in the main branch
-  MAIN_BRANCH_REPORTS_DIR=".github/reports"
-
-  # After running Lighthouse CI, move the reports to the main branch directory
-  step "Moving reports to the main branch directory"
-
-  # Create the main branch reports directory if it doesn't exist
-  mkdir -p "$MAIN_BRANCH_REPORTS_DIR"
-
+move_reports_to_empty_branch() {
   # Update this branch name to your desired branch for storing the reports
   REPORTS_BRANCH="lighthouse-reports"
 
-  # Create the reports branch if it doesn't exist
+  # Create the empty branch for storing the reports
   git checkout --orphan "$REPORTS_BRANCH"
+  # git rm -rf .
 
   # Move the reports from the workspace directory to the main repository
   mv /github/workspace/reports/* .
 
-  # Change to the main repository directory
-  pushd "/github/workspace"
+  step "list all files and folders"
+  ls -a
 
-  # Commit and push the changes directly to the main branch
+  # Commit the changes directly to the reports branch
   git config user.name "RoyMarmeto"
   git config user.email "mrinal@marmeto.com"
 
-  git branch
-  ls -a 
-  git status
+  step "Staging all files"
 
+  git add -A
+  git commit -m "Move reports to $REPORTS_BRANCH branch"
 
-  git add -A "$MAIN_BRANCH_REPORTS_DIR"
-
-  git status
-
-  git commit -m "Move reports to .github/reports directory"
-  
   # Set the personal access token (replace `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` with your actual token)
   ACCESS_TOKEN="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"
 
-  # Push to the main branch using the personal access token
-  # git push origin HEAD:main "$ACCESS_TOKEN"
-
+  step "Pushing all files"
   # Push the reports to the separate branch using the personal access token
   git push origin "$REPORTS_BRANCH" --force-with-lease "$ACCESS_TOKEN"
-
-  # Pop back to the original directory
-  popd
 }
+
 
 ####################################################################
 
 # Call the function to move the reports to the main branch
-move_reports_to_main_branch
+move_reports_to_empty_branch
 
 
 
