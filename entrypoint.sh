@@ -401,10 +401,7 @@ move_reports_to_main_branch() {
   git add -A "$MAIN_BRANCH_REPORTS_DIR"
   git commit -m "Move reports to .github/reports directory"
   
-  # Set the GITHUB_TOKEN for authentication
-  ACCESS_TOKEN="$GITHUB_TOKEN"  # Provided automatically by GitHub Actions
-  
-  git push origin HEAD:main
+  git push origin main
 
   # Pop back to the original directory
   popd
