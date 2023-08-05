@@ -362,7 +362,7 @@ upload_to_google_sheet() {
     # log "Data to send: $json_object"
 
     # data=$(cat /github/workspace/reports/manifest.json)
-    curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbwJniKE3kalCPI4p4kZ_NGMe04tPNbYd7PWxIMBcvm6bdNVf4C6cAbLgOK_vKCipJ0l/exec"
+    curl -X POST -H "Content-Type: application/json" -d @<(echo "$json_object") "https://script.google.com/macros/s/AKfycbwJniKE3kalCPI4p4kZ_NGMe04tPNbYd7PWxIMBcvm6bdNVf4C6cAbLgOK_vKCipJ0l/exec"
 }
 
 ls /github/workspace/reports/
