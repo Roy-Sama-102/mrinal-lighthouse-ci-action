@@ -385,6 +385,9 @@ move_reports_to_empty_branch() {
   # Move the reports from the workspace directory to the main repository
   mv /github/workspace/reports/* .
 
+  step "Git status"
+  git status
+
   step "list all files and folders"
   ls -a
 
