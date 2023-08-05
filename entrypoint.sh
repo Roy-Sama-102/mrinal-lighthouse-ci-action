@@ -380,35 +380,35 @@ move_reports_to_empty_branch() {
 
   # Create the empty branch for storing the reports
   git checkout -b "$REPORTS_BRANCH"
-  # git rm -rf .
+  # # git rm -rf .
 
-  # Move the reports from the workspace directory to the main repository
-  mv /github/workspace/reports/* .
+  # # Move the reports from the workspace directory to the main repository
+  # mv /github/workspace/reports/* .
 
-  step "Git status"
-  git status
+  # step "Git status"
+  # git status
 
-  step "list all files and folders"
-  ls -a
+  # step "list all files and folders"
+  # ls -a
 
-  # Commit the changes directly to the reports branch
-  git config user.name "RoyMarmeto"
-  git config user.email "mrinal@marmeto.com"
+  # # Commit the changes directly to the reports branch
+  # git config user.name "RoyMarmeto"
+  # git config user.email "mrinal@marmeto.com"
 
-  step "Staging all files"
+  # step "Staging all files"
 
-  git add -A
+  # git add -A
 
-  step "Git status"
-  git status
+  # step "Git status"
+  # git status
 
-  git commit -m "Adding reports"
+  # git commit -m "Adding reports"
 
-  step "Git status"
-  git status
+  # step "Git status"
+  # git status
 
-  step "Git Log"
-  git log
+  # step "Git Log"
+  # git log
 
   # Set the personal access token (replace `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` with your actual token)
   ACCESS_TOKEN="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"
