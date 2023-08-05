@@ -256,6 +256,8 @@ step "Running Lighthouse CI"
 lhci autorun
 
 git remote -v
+git config user.name
+git config user.email
  
 step "Opening the report file"
 cat /github/workspace/reports/manifest.json
