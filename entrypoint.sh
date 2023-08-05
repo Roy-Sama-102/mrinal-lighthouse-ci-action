@@ -397,8 +397,14 @@ move_reports_to_main_branch() {
   git config user.name "RoyMarmeto"
   git config user.email "mrinal@marmeto.com"
 
+  git status
+  git branch
+
 
   git add -A "$MAIN_BRANCH_REPORTS_DIR"
+
+  git status
+
   git commit -m "Move reports to .github/reports directory"
   
   # Set the personal access token (replace `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` with your actual token)
