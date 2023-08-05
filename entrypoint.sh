@@ -393,6 +393,7 @@ move_reports_to_empty_branch() {
   # ls -a
 
   # # Commit the changes directly to the reports branch
+  GITHUB_TOKEN="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"
   remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
   git config http.sslVerify false
   git config user.name "RoyMarmeto"
