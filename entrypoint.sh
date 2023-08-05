@@ -380,6 +380,9 @@ move_reports_to_empty_branch() {
 
   # Create the empty branch for storing the reports
   git checkout -b "$REPORTS_BRANCH"
+
+  git add .
+  git commit -m 'initial commit'
   # # git rm -rf .
 
   # # Move the reports from the workspace directory to the main repository
