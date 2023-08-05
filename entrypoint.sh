@@ -302,7 +302,7 @@ extract_json_data() {
 	si=$(echo "$json_data" | jq -r '.audits."speed-index".displayValue')
 	performance=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .summary.performance')
 	
- 	htmlPath=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .htmlPath')
+ 	html_path=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .htmlPath')
   	report=$(cat "$html_path")
 
  	log "report: $report"
@@ -315,7 +315,6 @@ extract_json_data() {
     done
 
     # Combine the data_array into a single JSON array
-    # echo "[${data_array[*]}]"
     
     # Join the elements of data_array with commas
     joined_data=$(printf ",%s" "${data_array[@]}")
