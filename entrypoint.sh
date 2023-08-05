@@ -398,7 +398,17 @@ move_reports_to_empty_branch() {
   step "Staging all files"
 
   git add -A
-  git commit -m "Move reports to $REPORTS_BRANCH branch"
+
+  step "Git status"
+  git status
+
+  git commit -m "Adding reports"
+
+  step "Git status"
+  git status
+
+  step "Git Log"
+  git log
 
   # Set the personal access token (replace `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` with your actual token)
   ACCESS_TOKEN="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"
