@@ -371,8 +371,6 @@ ls /github/workspace/reports/
 # Call the function to upload data to Google Sheet
 upload_to_google_sheet
 
-#!/usr/bin/env bash
-
 ####################################################################
 # Function to Move Reports to Main Branch
 
@@ -386,8 +384,14 @@ move_reports_to_main_branch() {
   # Create the main branch reports directory if it doesn't exist
   mkdir -p "$MAIN_BRANCH_REPORTS_DIR"
 
-  # Move the reports from the workspace directory to the main branch directory
-  mv /github/workspace/reports/* "$MAIN_BRANCH_REPORTS_DIR/"
+  # Update this branch name to your desired branch for storing the reports
+  REPORTS_BRANCH="lighthouse-reports"
+
+  # Create the reports branch if it doesn't exist
+  git checkout -B "$REPORTS_BRANCH"
+
+  # Move the reports from the workspace directory to the main repository
+  mv /github/workspace/reports/* .
 
   # Change to the main repository directory
   pushd "/github/workspace"
@@ -411,7 +415,10 @@ move_reports_to_main_branch() {
   ACCESS_TOKEN="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"
 
   # Push to the main branch using the personal access token
-  git push origin HEAD:main "$ACCESS_TOKEN"
+  # git push origin HEAD:main "$ACCESS_TOKEN"
+
+  # Push the reports to the separate branch using the personal access token
+  git push origin "$REPORTS_BRANCH" --force-with-lease "$ACCESS_TOKEN"
 
   # Pop back to the original directory
   popd
