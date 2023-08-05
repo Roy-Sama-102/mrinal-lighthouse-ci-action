@@ -394,16 +394,14 @@ move_reports_to_main_branch() {
   pushd "/github/workspace"
 
   # Commit and push the changes directly to the main branch
-  git config user.name "Your GitHub Username"
-  git config user.email "your-email@example.com"
+  git config user.name "RoyMarmeto"
+  git config user.email "mrinal@marmeto.com"
   git add -A "$MAIN_BRANCH_REPORTS_DIR"
   git commit -m "Move reports to .github/reports directory"
   git push origin HEAD:main
 
   # Pop back to the original directory
   popd
-
-  # ... (Your existing code)
 }
 
 ####################################################################
