@@ -309,21 +309,21 @@ extract_json_data() {
         html_content=$(cat "$html_file")
 
 
-	data_entry=$(cat <<-EOF
-		{
-		    "Page": "$page_type",
-		    "Requested Url": "$requestedUrl",
-		    "Performance": $performance,
-		    "First Contentful Paint": "$fcp",
-		    "Largest Contentful Paint": "$lcp",
-		    "Total Blocking Time": "$tbt",
-		    "Cumulative Layout Shift": "$cls",
-		    "Speed Index": "$si",
-		    "Event Info": "$event_info",
-		    "HTML content": "$html_content"
-		}
-        EOF
-        )
+    data_entry=$(cat <<-EOF
+        {
+            "Page": "$page_type",
+            "Requested Url": "$requestedUrl",
+            "Performance": $performance,
+            "First Contentful Paint": "$fcp",
+            "Largest Contentful Paint": "$lcp",
+            "Total Blocking Time": "$tbt",
+            "Cumulative Layout Shift": "$cls",
+            "Speed Index": "$si",
+            "Event Info": "$event_info",
+            "HTML content": "$html_content"
+        }
+EOF
+    )
 
         # Append the data_entry to the data_array
         data_array+=("$data_entry")
