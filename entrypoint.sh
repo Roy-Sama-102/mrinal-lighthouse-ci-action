@@ -255,6 +255,7 @@ log "Running lighthouse Step 1"
 step "Running Lighthouse CI"
 lhci autorun
 
+git branch 
 step "Opening the report file"
 cat /github/workspace/reports/manifest.json
 
@@ -319,8 +320,7 @@ extract_json_data() {
             "Total Blocking Time": "$tbt",
             "Cumulative Layout Shift": "$cls",
             "Speed Index": "$si",
-            "Event Info": "$event_info",
-            "HTML content": "$html_content"
+            "Event Info": "$event_info"
         }
 EOF
     )
@@ -362,8 +362,7 @@ upload_to_google_sheet() {
     # log "Data to send: $json_object"
 
     # data=$(cat /github/workspace/reports/manifest.json)
-    # curl -X POST -H "Content-Type: application/json" -d @<(echo "$json_object") "https://script.google.com/macros/s/AKfycbwJniKE3kalCPI4p4kZ_NGMe04tPNbYd7PWxIMBcvm6bdNVf4C6cAbLgOK_vKCipJ0l/exec"
-    curl -X POST -H "Content-Type: application/json" -d @<(echo "$json_object") "https://script.google.com/macros/s/AKfycbxGCorrP_yv9yza8pYEa8Gvq1p0cV5-DrfkWx1uYrbdRx-Kz4ITIZClB8I8kpZV8YXu/exec"
+    curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbwJniKE3kalCPI4p4kZ_NGMe04tPNbYd7PWxIMBcvm6bdNVf4C6cAbLgOK_vKCipJ0l/exec"
 }
 
 ls /github/workspace/reports/
