@@ -381,8 +381,6 @@ move_reports_to_empty_branch() {
   # Create the empty branch for storing the reports
   git checkout -b "$REPORTS_BRANCH"
 
-  git add .
-  git commit -m 'initial commit'
   # # git rm -rf .
 
   # # Move the reports from the workspace directory to the main repository
@@ -395,8 +393,11 @@ move_reports_to_empty_branch() {
   # ls -a
 
   # # Commit the changes directly to the reports branch
-  # git config user.name "RoyMarmeto"
-  # git config user.email "mrinal@marmeto.com"
+  git config user.name "RoyMarmeto"
+  git config user.email "mrinal@marmeto.com"
+
+  git add .
+  git commit -m 'initial commit'
 
   # step "Staging all files"
 
