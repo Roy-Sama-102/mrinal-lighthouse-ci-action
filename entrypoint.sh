@@ -259,7 +259,6 @@ git remote -v
  
 step "Opening the report file"
 cat /github/workspace/reports/manifest.json
-ls /
 
 # Function to extract JSON data from the files and create the desired structure
 extract_json_data() {
@@ -397,6 +396,7 @@ move_reports_to_main_branch() {
   git config user.name "RoyMarmeto"
   git config user.email "mrinal@marmeto.com"
 
+  ls -a 
   git status
   git branch
 
