@@ -379,18 +379,18 @@ move_reports_to_empty_branch() {
   REPORTS_BRANCH="lighthouse-reports"
 
   # Create the empty branch for storing the reports
-  # git checkout -b "$REPORTS_BRANCH"
+  git checkout -b "$REPORTS_BRANCH"
 
   # # git rm -rf .
 
   # # Move the reports from the workspace directory to the main repository
-  # mv /github/workspace/reports/* .
+  mv /github/workspace/reports/* .
 
   # step "Git status"
   # git status
 
-  # step "list all files and folders"
-  # ls -a
+  step "list all files and folders"
+  ls -a
 
   # # Commit the changes directly to the reports branch
   GITHUB_TOKEN="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"
@@ -405,7 +405,7 @@ move_reports_to_empty_branch() {
   git add .
   git commit -m 'initial commit'
 
-  git checkout -b ${REPORTS_BRANCH}
+  # git checkout -b ${REPORTS_BRANCH}
 	git add -A
 	timestamp=$(date -u)
 	git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
