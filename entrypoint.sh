@@ -401,6 +401,7 @@ step "mkdir"
 mkdir test
 cd test
 git clone https://github.com/Roy-Sama-102/little-muffet.git
+ls
 cd little-muffet
 
 step "number of commits"
