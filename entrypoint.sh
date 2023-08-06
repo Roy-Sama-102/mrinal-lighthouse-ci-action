@@ -394,6 +394,8 @@ log "Total number of commits: $commit_count"
 step "credentials"
 git config --global user.name "RoyMarmeto"
 git config --global user.email "mrinal@marmeto.com"
+git config user.name
+git config user.email
 
 step "mkdir"
 mkdir test
