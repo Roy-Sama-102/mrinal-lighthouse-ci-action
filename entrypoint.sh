@@ -366,7 +366,7 @@ upload_to_google_sheet() {
     curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbyB5ZndlIiVjJvpRpXBWfJvlGrMdjCcohTs5s2J5quzx3FqOn8CsftifHEQPwUdlEBj/exec"
 }
 
-ls /github/workspace/reports/
+# ls /github/workspace/reports/
 
 # Call the function to upload data to Google Sheet
 upload_to_google_sheet
@@ -389,6 +389,7 @@ move_reports_to_empty_branch() {
   # step "Git status"
   # git status
 
+  ##############
   step "list all files and folders"
   ls -a
 
@@ -402,8 +403,8 @@ move_reports_to_empty_branch() {
   git show-ref # useful for debugging
   git branch --verbose
 
-  git add .
-  git commit -m 'initial commit'
+  # git add .
+  # git commit -m 'initial commit'
 
   # git checkout -b ${REPORTS_BRANCH}
 	git add -A
