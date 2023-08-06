@@ -395,8 +395,11 @@ step "credentials"
 git config --global user.name "RoyMarmeto"
 git config --global user.email "mrinal@marmeto.com"
 
-step "pull --all"
-git pull --all
+step "mkdir"
+mkdir test
+cd test
+git clone https://github.com/Roy-Sama-102/little-muffet.git
+cd little-muffet
 
 step "number of commits"
 commit_count=$(git log --oneline | wc -l)
