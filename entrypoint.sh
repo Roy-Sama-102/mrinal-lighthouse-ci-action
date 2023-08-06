@@ -387,6 +387,16 @@ git status
 step "ls -a"
 ls -a
 
+step "git log"
+git log
+
+step "make a new branch"
+git checkout -b test
+
+step "pushing the new branch"
+git push origin test
+
+
 
 
 
