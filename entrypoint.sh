@@ -379,7 +379,7 @@ step "pwd"
 pwd
 
 step "git branch"
-git branch
+git branch -a
 
 step "git status"
 git status
