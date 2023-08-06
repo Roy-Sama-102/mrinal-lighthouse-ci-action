@@ -397,12 +397,10 @@ git config --global user.email "mrinal@marmeto.com"
 git config user.name
 git config user.email
 
-step "mkdir"
-mkdir test
-cd test
-git clone https://github.com/Roy-Sama-102/little-muffet.git
-ls
-cd little-muffet
+step "git fetch"
+git fetch --all
+git pull --all
+
 
 step "number of commits"
 commit_count=$(git log --oneline | wc -l)
