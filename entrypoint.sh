@@ -371,76 +371,23 @@ upload_to_google_sheet() {
 # Call the function to upload data to Google Sheet
 upload_to_google_sheet
 
-####################################################################
-# Function to Move Reports to Main Branch
-
-move_reports_to_empty_branch() {
-  # Update this branch name to your desired branch for storing the reports
-  REPORTS_BRANCH="lighthouse-reports"
-
-  # Create the empty branch for storing the reports
-  git checkout -b "$REPORTS_BRANCH"
-
-  # # git rm -rf .
-
-  # # Move the reports from the workspace directory to the main repository
-  mv /github/workspace/reports/* .
-
-  # step "Git status"
-  # git status
-
-  ##############
-  step "list all files and folders"
-  ls -a
-
-  # # Commit the changes directly to the reports branch
-  GITHUB_TOKEN="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"
-  remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-  git config http.sslVerify false
-  git config user.name "RoyMarmeto"
-  git config user.email "mrinal@marmeto.com"
-  git remote add publisher "${remote_repo}"
-  git show-ref # useful for debugging
-  git branch --verbose
-
-  # git add .
-  # git commit -m 'initial commit'
-
-  # git checkout -b ${REPORTS_BRANCH}
-	git add -A
-	timestamp=$(date -u)
-	git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
-	git pull --rebase publisher ${REPORTS_BRANCH}
-	git push publisher ${REPORTS_BRANCH}
-
-  # step "Staging all files"
-
-  # git add -A
-
-  # step "Git status"
-  # git status
-
-  # git commit -m "Adding reports"
-
-  # step "Git status"
-  # git status
-
-  # step "Git Log"
-  # git log
 
   # Set the personal access token (replace `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` with your actual token)
   ACCESS_TOKEN="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"
 
-  step "Pushing all files"
-  # Push the reports to the separate branch using the personal access token
-  git push origin "$REPORTS_BRANCH" --force-with-lease "$ACCESS_TOKEN"
-}
+step "pwd"
+pwd
+
+step "git branch"
+git branch
+
+step "git status"
+git status
+
+step "ls -a"
+ls -a
 
 
-####################################################################
-
-# Call the function to move the reports to the main branch
-move_reports_to_empty_branch
 
 
 
