@@ -384,9 +384,6 @@ git branch
 step "git status"
 git status
 
-step "ls -a"
-ls -a
-
 step "git log"
 git log
 
