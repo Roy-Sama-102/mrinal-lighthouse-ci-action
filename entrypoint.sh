@@ -395,8 +395,8 @@ step "credentials"
 git config --global user.name "RoyMarmeto"
 git config --global user.email "mrinal@marmeto.com"
 
-step "Rebasing"
-git rebase origin/main
+step "pull --all"
+git pull --all
 
 step "number of commits"
 commit_count=$(git log --oneline | wc -l)
