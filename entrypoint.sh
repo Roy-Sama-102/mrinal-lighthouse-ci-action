@@ -426,29 +426,31 @@ BRANCH_NAME='test'
 GITHUB_TOKEN="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"
 
 # initialize git
-remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-git config http.sslVerify false
-git config user.name "Automated Publisher"
-git config user.email "actions@users.noreply.github.com"
-git remote add publisher "${remote_repo}"
-git show-ref # useful for debugging
-git branch --verbose
-
-# install lfs hooks
-# git lfs install
-
-# publish any new files
-git remote update
-git fetch 
-git checkout --track publisher/${BRANCH_NAME}
-git add -A
-timestamp=$(date -u)
-git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
-git pull --rebase publisher ${BRANCH_NAME}
-git push publisher ${BRANCH_NAME} ${GITHUB_TOKEN}
+# remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+# git config http.sslVerify false
+# git config user.name "Automated Publisher"
+# git config user.email "actions@users.noreply.github.com"
+# git remote add publisher "${remote_repo}"
+# git show-ref # useful for debugging
+# git branch --verbose
 
 
+# git remote update
+# git fetch 
+# git checkout --track publisher/${BRANCH_NAME}
+# git add -A
+# timestamp=$(date -u)
+# git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
+# git pull --rebase publisher ${BRANCH_NAME}
+# git push publisher ${BRANCH_NAME} ${GITHUB_TOKEN}
 
+set -x
 
+CLONE_DIR=$(mktemp -d)
+
+echo "Cloning destination git repository"
+git config --global user.email "mrinal@marmeto.com"
+git config --global user.name "$RoyMarmeto"
+git clone --single-branch --branch test "https://x-access-token:$GITHUB_TOKEN@github.com/${GITHUB_REPOSITORY}.git" "$CLONE_DIR"
 
 
