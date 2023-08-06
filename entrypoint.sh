@@ -400,7 +400,7 @@ git config user.email
 step "git fetch"
 git fetch --all
 git pull --all
-
+git branch -a
 
 step "number of commits"
 commit_count=$(git log --oneline | wc -l)
