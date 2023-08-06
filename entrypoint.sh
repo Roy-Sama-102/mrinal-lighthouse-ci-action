@@ -395,6 +395,14 @@ step "credentials"
 git config --global user.name "RoyMarmeto"
 git config --global user.email "mrinal@marmeto.com"
 
+step "Rebasing"
+git rebase origin/main
+
+step "number of commits"
+commit_count=$(git log --oneline | wc -l)
+log "Total number of commits: $commit_count"
+
+
 step "make a new branch"
 git checkout -b test
 
