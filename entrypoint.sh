@@ -378,6 +378,13 @@ upload_to_google_sheet
 step "pwd"
 pwd
 
+YOUR_GITHUB_USERNAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)"
+YOUR_REPO_NAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)"
+PAT_TOKEN="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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
+
+# Set the remote URL dynamically with the PAT
+git remote set-url origin "https://$YOUR_GITHUB_USERNAME:${PAT_TOKEN}@github.com/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME.git"
+
 step "git branch"
 git branch -a
 
