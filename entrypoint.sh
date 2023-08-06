@@ -378,52 +378,52 @@ upload_to_google_sheet
 step "pwd"
 pwd
 
-# step "git branch"
-# git branch
+step "git branch"
+git branch
 
-# step "git status"
-# git status
+step "git status"
+git status
 
-# step "git log"
-# git log
+step "git log"
+git log
 
-# step "number of commits"
-# commit_count=$(git log --oneline | wc -l)
-# log "Total number of commits: $commit_count"
+step "number of commits"
+commit_count=$(git log --oneline | wc -l)
+log "Total number of commits: $commit_count"
 
-# step "credentials"
-# git config --global user.name "RoyMarmeto"
-# git config --global user.email "mrinal@marmeto.com"
-# git config user.name
-# git config user.email
+step "credentials"
+git config --global user.name "RoyMarmeto"
+git config --global user.email "mrinal@marmeto.com"
+git config user.name
+git config user.email
 
-# step "git fetch"
-# git fetch --all
-# git pull --all
-
-
-# step "number of commits"
-# commit_count=$(git log --oneline | wc -l)
-# log "Total number of commits: $commit_count"
+step "git fetch"
+git fetch --all
+git pull --all
 
 
-# step "make a new branch"
-# git checkout -b test
+step "number of commits"
+commit_count=$(git log --oneline | wc -l)
+log "Total number of commits: $commit_count"
 
-# step "git status"
-# git status
 
-# step "git add"
-# git add .
+step "make a new branch"
+git checkout -b test
 
-# step "git commit"
-# git commit -m 'initial commit'
+step "git status"
+git status
 
-# step "pushing the new branch"
-# git push -f origin test "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"
+step "git add"
+git add .
 
-BRANCH_NAME='test'
-GITHUB_TOKEN="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"
+step "git commit"
+git commit -m 'initial commit'
+
+step "pushing the new branch"
+git push -f origin test "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"
+
+# BRANCH_NAME='test'
+# GITHUB_TOKEN="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"
 
 # initialize git
 # remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
@@ -446,11 +446,11 @@ GITHUB_TOKEN="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"
 
 set -x
 
-CLONE_DIR=$(mktemp -d)
+# CLONE_DIR=$(mktemp -d)
 
-echo "Cloning destination git repository"
-git config --global user.email "mrinal@marmeto.com"
-git config --global user.name "RoyMarmeto"
-git clone --single-branch --branch test "https://x-access-token:$GITHUB_TOKEN@github.com/${GITHUB_REPOSITORY}.git" "$CLONE_DIR"
+# echo "Cloning destination git repository"
+# git config --global user.email "mrinal@marmeto.com"
+# git config --global user.name "RoyMarmeto"
+# git clone --single-branch --branch test "https://x-access-token:$GITHUB_TOKEN@github.com/${GITHUB_REPOSITORY}.git" "$CLONE_DIR"
 
 
