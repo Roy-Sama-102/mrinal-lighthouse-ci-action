@@ -408,7 +408,9 @@ log "Total number of commits: $commit_count"
 
 
 step "make a new branch"
-git checkout -b test
+git remote update
+git fetch
+git checkout --track origin/test
 
 step "git status"
 git status
