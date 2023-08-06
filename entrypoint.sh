@@ -438,7 +438,7 @@ git branch --verbose
 # git lfs install
 
 # publish any new files
-git checkout -b ${BRANCH_NAME}
+git checkout ${BRANCH_NAME}
 git add -A
 timestamp=$(date -u)
 git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
