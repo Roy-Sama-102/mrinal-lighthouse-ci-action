@@ -401,6 +401,15 @@ git config user.email
 step "make a new branch"
 git checkout -b test
 
+step "git status"
+git status
+
+step "git add"
+git add .
+
+step "git commit"
+git commit -m 'initial commit'
+
 step "pushing the new branch"
 git push origin test "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"
 
