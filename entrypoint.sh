@@ -440,7 +440,7 @@ git branch --verbose
 # publish any new files
 git remote update
 git fetch 
-git checkout --track origin/${BRANCH_NAME}
+git checkout ${BRANCH_NAME}
 git add -A
 timestamp=$(date -u)
 git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
