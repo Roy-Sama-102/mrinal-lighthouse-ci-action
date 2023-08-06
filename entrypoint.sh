@@ -465,7 +465,7 @@ set -x
 step "Doing nework request push"
 
 GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
-AUTH_HEADER="Authorization: token "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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
+AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
 
 YOUR_GITHUB_USERNAME=$(curl -s -H "$AUTH_HEADER" "$GITHUB_API_URL" | jq -r '.owner.login')
 YOUR_REPO_NAME=$(curl -s -H "$AUTH_HEADER" "$GITHUB_API_URL" | jq -r '.name')
