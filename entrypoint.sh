@@ -462,4 +462,23 @@ set -x
 # git config --global user.name "RoyMarmeto"
 # git clone --single-branch --branch test "https://x-access-token:$GITHUB_TOKEN@github.com/${GITHUB_REPOSITORY}.git" "$CLONE_DIR"
 
+GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
+AUTH_HEADER="Authorization: token "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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
+
+YOUR_GITHUB_USERNAME=$(curl -s -H "$AUTH_HEADER" "$GITHUB_API_URL" | jq -r '.owner.login')
+YOUR_REPO_NAME=$(curl -s -H "$AUTH_HEADER" "$GITHUB_API_URL" | jq -r '.name')
+
+# Now you can continue with the rest of the script using the dynamic variables
+cd /path/to/your/repo
+git add reports
+git commit -m "Add Lighthouse reports"
+
+# Push the changes using GitHub API with curl
+GIT_COMMIT_SHA=$(git rev-parse HEAD)
+PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
+PUSH_BODY="{ \"ref\": \"refs/heads/main\", \"sha\": \"$GIT_COMMIT_SHA\" }"
+PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/main"
+
+curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
+
 
