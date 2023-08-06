@@ -390,6 +390,14 @@ ls -a
 step "git log"
 git log
 
+step "number of commits"
+commit_count=$(git log --oneline | wc -l)
+log "Total number of commits: $commit_count"
+
+step "credentials"
+git config user.name
+git config user.email
+
 step "make a new branch"
 git checkout -b test
 
