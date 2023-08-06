@@ -450,7 +450,7 @@ CLONE_DIR=$(mktemp -d)
 
 echo "Cloning destination git repository"
 git config --global user.email "mrinal@marmeto.com"
-git config --global user.name "$RoyMarmeto"
+git config --global user.name "RoyMarmeto"
 git clone --single-branch --branch test "https://x-access-token:$GITHUB_TOKEN@github.com/${GITHUB_REPOSITORY}.git" "$CLONE_DIR"
 
 
