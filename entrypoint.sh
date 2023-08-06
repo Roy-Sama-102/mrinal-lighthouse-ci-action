@@ -472,6 +472,7 @@ YOUR_REPO_NAME=$(curl -s -H "$AUTH_HEADER" "$GITHUB_API_URL" | jq -r '.name')
 
 # Now you can continue with the rest of the script using the dynamic variables
 # cd /path/to/your/repo
+ls -a
 git add reports
 git commit -m "Add Lighthouse reports"
 
