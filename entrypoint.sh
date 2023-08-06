@@ -402,15 +402,15 @@ git fetch --all
 git pull --all
 git branch -a
 
-step "number of commits"
-commit_count=$(git log --oneline | wc -l)
-log "Total number of commits: $commit_count"
-
 
 step "make a new branch"
 git remote update
 git fetch
 git checkout --track origin/test
+
+step "number of commits"
+commit_count=$(git log --oneline | wc -l)
+log "Total number of commits: $commit_count"
 
 step "git status"
 git status
