@@ -429,7 +429,7 @@ step "git commit"
 git commit -m 'initial commit'
 
 step "pushing the new branch"
-git push -u origin test "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"
+# git push -u origin test "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"
 
 # BRANCH_NAME='test'
 # GITHUB_TOKEN="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"
@@ -476,8 +476,8 @@ git commit -m "Add Lighthouse reports"
 # Push the changes using GitHub API with curl
 GIT_COMMIT_SHA=$(git rev-parse HEAD)
 PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
-PUSH_BODY="{ \"ref\": \"refs/heads/main\", \"sha\": \"$GIT_COMMIT_SHA\" }"
-PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/main"
+PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
+PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
 
 curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
 
