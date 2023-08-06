@@ -420,7 +420,7 @@ step "git commit"
 git commit -m 'initial commit'
 
 step "pushing the new branch"
-git push -f origin test "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"
+git push -u origin test "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"
 
 # BRANCH_NAME='test'
 # GITHUB_TOKEN="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"
