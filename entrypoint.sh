@@ -423,6 +423,7 @@ pwd
 # git push -f origin test "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"
 
 BRANCH_NAME='test'
+GITHUB_TOKEN="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"
 
 # initialize git
 remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
