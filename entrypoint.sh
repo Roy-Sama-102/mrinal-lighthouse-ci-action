@@ -302,7 +302,13 @@ extract_json_data() {
 	tbt=$(echo "$json_data" | jq -r '.audits."total-blocking-time".displayValue')
 	cls=$(echo "$json_data" | jq -r '.audits."cumulative-layout-shift".displayValue')
 	si=$(echo "$json_data" | jq -r '.audits."speed-index".displayValue')
-	performance=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .summary.performance')
+	# performance=$(echo "$manifest" | jq --arg finalUrl "$finalUrl" '.[] | select(.url == $finalUrl) | .summary.performance')
+
+	# Extract the filename from the path
+	filename=$(basename "$file")
+	
+	# Get the performance value from the manifest using the filename
+	performance=$(echo "$manifest" | jq --arg filename "$filename" 'map(select(.jsonPath | contains($filename))) | .[0].summary.performance')
 	
         # Replace the .json extension with .html to get the corresponding HTML file path
         html_file="${file%.json}.html"
