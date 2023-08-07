@@ -251,7 +251,11 @@ log "Running lighthouse Step 1"
 step "Running Lighthouse CI"
 lhci autorun
 
+step "Remotes"
 git remote -v
+
+step "All the files"
+ls /github/workspace/reports/
  
 step "Opening the report file"
 cat /github/workspace/reports/manifest.json
@@ -356,7 +360,7 @@ upload_to_google_sheet() {
     json_object="{ \"$repository_name\": $data }"
 
     # Print the JSON object
-    # log "Data to send: $json_object"
+    log "Data to send: $json_object"
 
     # data=$(cat /github/workspace/reports/manifest.json)
     curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbyB5ZndlIiVjJvpRpXBWfJvlGrMdjCcohTs5s2J5quzx3FqOn8CsftifHEQPwUdlEBj/exec"
@@ -374,74 +378,74 @@ upload_to_google_sheet
 step "pwd"
 pwd
 
-YOUR_GITHUB_USERNAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)"
-YOUR_REPO_NAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)"
-PAT_TOKEN="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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
+# YOUR_GITHUB_USERNAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)"
+# YOUR_REPO_NAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)"
+# PAT_TOKEN="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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
 
-# Set the remote URL dynamically with the PAT
-git remote set-url origin "https://$YOUR_GITHUB_USERNAME:${PAT_TOKEN}@github.com/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME.git"
+# # Set the remote URL dynamically with the PAT
+# git remote set-url origin "https://$YOUR_GITHUB_USERNAME:${PAT_TOKEN}@github.com/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME.git"
 
-step "git branch"
-git branch -a
+# step "git branch"
+# git branch -a
 
-step "git status"
-git status
+# step "git status"
+# git status
 
-step "git log"
-git log
+# step "git log"
+# git log
 
-step "number of commits"
-commit_count=$(git log --oneline | wc -l)
-log "Total number of commits: $commit_count"
+# step "number of commits"
+# commit_count=$(git log --oneline | wc -l)
+# log "Total number of commits: $commit_count"
 
-step "credentials"
-git config --global user.name "RoyMarmeto"
-git config --global user.email "mrinal@marmeto.com"
-git config user.name
-git config user.email
+# step "credentials"
+# git config --global user.name "RoyMarmeto"
+# git config --global user.email "mrinal@marmeto.com"
+# git config user.name
+# git config user.email
 
-step "git fetch"
-git fetch --all
-git pull --all
-git branch -a
+# step "git fetch"
+# git fetch --all
+# git pull --all
+# git branch -a
 
 
-step "make a new branch"
-git remote update
-git fetch
-git checkout --track origin/test
+# step "make a new branch"
+# git remote update
+# git fetch
+# git checkout --track origin/test
 
-step "number of commits"
-commit_count=$(git log --oneline | wc -l)
-log "Total number of commits: $commit_count"
+# step "number of commits"
+# commit_count=$(git log --oneline | wc -l)
+# log "Total number of commits: $commit_count"
 
-step "git status"
-git status
+# step "git status"
+# git status
 
-step "git add"
-git add .
+# step "git add"
+# git add .
 
-step "git commit"
-git commit -m 'initial commit'
+# step "git commit"
+# git commit -m 'initial commit'
 
-step "pushing the new branch"
-# set -x
+# step "pushing the new branch"
+# # set -x
 
-# step "Doing nework request push"
+# # step "Doing nework request push"
 
-GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
-AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
+# GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
+# AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
 
-YOUR_GITHUB_USERNAME='Roy-Sama-102'
-YOUR_REPO_NAME='little-muffet'
+# YOUR_GITHUB_USERNAME='Roy-Sama-102'
+# YOUR_REPO_NAME='little-muffet'
 
-ls -a
+# ls -a
 
-# Push the changes using GitHub API with curl
-GIT_COMMIT_SHA=$(git rev-parse HEAD)
-PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
-PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
-PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
+# # Push the changes using GitHub API with curl
+# GIT_COMMIT_SHA=$(git rev-parse HEAD)
+# PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
+# PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
+# PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
 
 curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
 
