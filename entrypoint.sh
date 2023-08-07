@@ -429,20 +429,20 @@ step "pushing the new branch"
 
 # step "Doing nework request push"
 
-# GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
-# AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
+GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
+AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
 
-# YOUR_GITHUB_USERNAME='Roy-Sama-102'
-# YOUR_REPO_NAME='little-muffet'
+YOUR_GITHUB_USERNAME='Roy-Sama-102'
+YOUR_REPO_NAME='little-muffet'
 
-# ls -a
+ls -a
 
-# # Push the changes using GitHub API with curl
-# GIT_COMMIT_SHA=$(git rev-parse HEAD)
-# PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
-# PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
-# PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
+# Push the changes using GitHub API with curl
+GIT_COMMIT_SHA=$(git rev-parse HEAD)
+PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
+PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
+PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
 
-# curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
+curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
 
 
