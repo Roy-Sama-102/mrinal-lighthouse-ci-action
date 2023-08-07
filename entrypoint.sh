@@ -372,87 +372,23 @@ upload_to_google_sheet() {
     curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbyB5ZndlIiVjJvpRpXBWfJvlGrMdjCcohTs5s2J5quzx3FqOn8CsftifHEQPwUdlEBj/exec"
 }
 
-# ls /github/workspace/reports/
-
 # Call the function to upload data to Google Sheet
 upload_to_google_sheet
 
 
-  # Set the personal access token (replace `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` with your actual token)
-  ACCESS_TOKEN="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"
+# Set the personal access token (replace `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` with your actual token)
+ACCESS_TOKEN="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"
 
-step "pwd"
-pwd
+if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+  DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+  PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
 
-# YOUR_GITHUB_USERNAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)"
-# YOUR_REPO_NAME="$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)"
-# PAT_TOKEN="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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
-
-# # Set the remote URL dynamically with the PAT
-# git remote set-url origin "https://$YOUR_GITHUB_USERNAME:${PAT_TOKEN}@github.com/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME.git"
-
-# step "git branch"
-# git branch -a
-
-# step "git status"
-# git status
-
-# step "git log"
-# git log
-
-# step "number of commits"
-# commit_count=$(git log --oneline | wc -l)
-# log "Total number of commits: $commit_count"
-
-# step "credentials"
-# git config --global user.name "RoyMarmeto"
-# git config --global user.email "mrinal@marmeto.com"
-# git config user.name
-# git config user.email
-
-# step "git fetch"
-# git fetch --all
-# git pull --all
-# git branch -a
-
-
-# step "make a new branch"
-# git remote update
-# git fetch
-# git checkout --track origin/test
-
-# step "number of commits"
-# commit_count=$(git log --oneline | wc -l)
-# log "Total number of commits: $commit_count"
-
-# step "git status"
-# git status
-
-# step "git add"
-# git add .
-
-# step "git commit"
-# git commit -m 'initial commit'
-
-# step "pushing the new branch"
-# # set -x
-
-# # step "Doing nework request push"
-
-# GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
-# AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
-
-# YOUR_GITHUB_USERNAME='Roy-Sama-102'
-# YOUR_REPO_NAME='little-muffet'
-
-# ls -a
-
-# # Push the changes using GitHub API with curl
-# GIT_COMMIT_SHA=$(git rev-parse HEAD)
-# PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
-# PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
-# PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
-
-# curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
-
+  if [ "$PR_BASE_BRANCH" = "$DEFAULT_BRANCH" ]; then
+    log "This is a Pull Request to the default branch: $DEFAULT_BRANCH. Uploading to Google Sheets..."
+  else
+    log "This is a Pull Request, but not to the default branch.  Skipping upload to Google Sheets."
+  fi
+else
+  log "This is not a Pull Request. Skipping upload to Google Sheets."
+fi
 
