@@ -216,7 +216,6 @@ ci:
     outputDir: ./reports
   assert:
     assertions:
-   assertions:
       "categories:performance":
         - warn
         - minScore: $min_score_performance
