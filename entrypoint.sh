@@ -199,7 +199,7 @@ min_score_accessibility="${LHCI_MIN_SCORE_ACCESSIBILITY:-0.9}"
 cat <<- EOF > lighthouserc.yml
 ci:
   collect:
-    numberOfRuns: 1
+    numberOfRuns: 3
     url:
       - "$host/$query_string"
       - "$host/products/$product_handle$query_string"
@@ -426,59 +426,24 @@ step "git commit"
 git commit -m 'initial commit'
 
 step "pushing the new branch"
-# git push -u origin test "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"
+# set -x
 
-# BRANCH_NAME='test'
-# GITHUB_TOKEN="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"
+# step "Doing nework request push"
 
-# initialize git
-# remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-# git config http.sslVerify false
-# git config user.name "Automated Publisher"
-# git config user.email "actions@users.noreply.github.com"
-# git remote add publisher "${remote_repo}"
-# git show-ref # useful for debugging
-# git branch --verbose
+# GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
+# AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
 
+# YOUR_GITHUB_USERNAME='Roy-Sama-102'
+# YOUR_REPO_NAME='little-muffet'
 
-# git remote update
-# git fetch 
-# git checkout --track publisher/${BRANCH_NAME}
-# git add -A
-# timestamp=$(date -u)
-# git commit -m "Automated publish: ${timestamp} ${GITHUB_SHA}" || exit 0
-# git pull --rebase publisher ${BRANCH_NAME}
-# git push publisher ${BRANCH_NAME} ${GITHUB_TOKEN}
+# ls -a
 
-set -x
+# # Push the changes using GitHub API with curl
+# GIT_COMMIT_SHA=$(git rev-parse HEAD)
+# PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
+# PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
+# PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
 
-# CLONE_DIR=$(mktemp -d)
-
-# echo "Cloning destination git repository"
-# git config --global user.email "mrinal@marmeto.com"
-# git config --global user.name "RoyMarmeto"
-# git clone --single-branch --branch test "https://x-access-token:$GITHUB_TOKEN@github.com/${GITHUB_REPOSITORY}.git" "$CLONE_DIR"
-
-step "Doing nework request push"
-
-GITHUB_API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY"
-AUTH_HEADER="Authorization: token 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"  # Assuming you've defined the secret PAT_TOKEN in the GitHub repository
-
-YOUR_GITHUB_USERNAME='Roy-Sama-102'
-YOUR_REPO_NAME='little-muffet'
-
-# Now you can continue with the rest of the script using the dynamic variables
-# cd /path/to/your/repo
-ls -a
-# git add reports
-# git commit -m "Add Lighthouse reports"
-
-# Push the changes using GitHub API with curl
-GIT_COMMIT_SHA=$(git rev-parse HEAD)
-PUSH_COMMIT_MESSAGE="Add Lighthouse reports"
-PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
-PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
-
-curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
+# curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
 
 
