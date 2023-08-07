@@ -374,7 +374,7 @@ upload_to_google_sheet() {
 	  PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
 	
 	  if [ "$PR_BASE_BRANCH" = "$DEFAULT_BRANCH" ]; then
-   	    step "Uploading the reports to google sheets"
+   	    step "Uploading the reports to Google Sheets"
 	
 	    log "This is a Pull Request to the default branch: $DEFAULT_BRANCH. Uploading to Google Sheets..."
      	    log "Sheet url: https://docs.google.com/spreadsheets/d/1kcA7iPXsEuzktgTpmcstz1ylUm5znWKx0X5eaPP_R3c"
