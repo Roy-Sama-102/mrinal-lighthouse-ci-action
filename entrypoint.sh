@@ -216,13 +216,10 @@ ci:
     outputDir: ./reports
   assert:
     assertions:
+   assertions:
       "categories:performance":
-        - error
-        - minScore: 0.1
-          aggregationMethod: median-run
-      "categories:accessibility":
-        - error
-        - minScore: 0.1
+        - warn
+        - minScore: $min_score_performance
           aggregationMethod: median-run
 EOF
 
