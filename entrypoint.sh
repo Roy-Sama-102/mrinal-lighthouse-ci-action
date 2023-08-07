@@ -265,9 +265,12 @@ extract_json_data() {
     # Read the manifest.json file and extract its content
     manifest=$(cat /github/workspace/reports/manifest.json)
 
+   pull_request_number=$(jq -r ".pull_request.number" "$GITHUB_EVENT_PATH")
+   log "pull_request_number: $pull_request_number"
+
     # Get the event name or action URL
     if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
-        event_info="Pull Request Link: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/pull/$GITHUB_EVENT_NUMBER"
+        event_info="Pull Request Link: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/pull/$pull_request_number"
     else
         event_info="Event Name: $GITHUB_EVENT_NAME, Action URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
     fi
