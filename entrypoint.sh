@@ -353,14 +353,12 @@ EOF
 }
 
 
-step "Uploading the reports to sheets"
+step "Getting the JSON data"
 
 # Function to upload data to Google Sheets using cURL
 upload_to_google_sheet() {
     # Read JSON data from file
     data=$(extract_json_data)
-
-    # log "data_to_send: $data"
     
     # Extract only the repository name from $GITHUB_REPOSITORY
     repository_name=$(basename $GITHUB_REPOSITORY)
@@ -369,10 +367,25 @@ upload_to_google_sheet() {
     json_object="{ \"$repository_name\": $data }"
 
     # Print the JSON object
-    log "Data to send: $json_object"
-
-    # data=$(cat /github/workspace/reports/manifest.json)
-    curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbyB5ZndlIiVjJvpRpXBWfJvlGrMdjCcohTs5s2J5quzx3FqOn8CsftifHEQPwUdlEBj/exec"
+    log "Consolidated Reports: $json_object"
+    
+	if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+	  DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+	  PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
+	
+	  if [ "$PR_BASE_BRANCH" = "$DEFAULT_BRANCH" ]; then
+   	    step "Uploading the reports to google sheets"
+	
+	    log "This is a Pull Request to the default branch: $DEFAULT_BRANCH. Uploading to Google Sheets..."
+     	    log "Sheet url: https://docs.google.com/spreadsheets/d/1kcA7iPXsEuzktgTpmcstz1ylUm5znWKx0X5eaPP_R3c"
+	  
+     	    curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbyB5ZndlIiVjJvpRpXBWfJvlGrMdjCcohTs5s2J5quzx3FqOn8CsftifHEQPwUdlEBj/exec"
+	  else
+	    log "This is a Pull Request, but not to the default branch.  Skipping upload to Google Sheets."
+	  fi
+	else
+	  log "This is not a Pull Request. Skipping upload to Google Sheets."
+	fi
 }
 
 # Call the function to upload data to Google Sheet
@@ -382,28 +395,28 @@ upload_to_google_sheet
 # Set the personal access token (replace `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` with your actual token)
 ACCESS_TOKEN="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"
 
-  DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
-  PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
+#   DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+#   PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
 
-step "GITHUB_EVENT_NAME"
-log "$GITHUB_EVENT_NAME"
+# step "GITHUB_EVENT_NAME"
+# log "$GITHUB_EVENT_NAME"
 
-step "DEFAULT_BRANCH"
-log "DEFAULT_BRANCH: $DEFAULT_BRANCH"
+# step "DEFAULT_BRANCH"
+# log "DEFAULT_BRANCH: $DEFAULT_BRANCH"
 
-step "PR_BASE_BRANCH"
-log "PR_BASE_BRANCH: $PR_BASE_BRANCH"
+# step "PR_BASE_BRANCH"
+# log "PR_BASE_BRANCH: $PR_BASE_BRANCH"
 
-if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-  DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
-  PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
+# if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+#   DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+#   PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
 
-  if [ "$PR_BASE_BRANCH" = "$DEFAULT_BRANCH" ]; then
-    log "This is a Pull Request to the default branch: $DEFAULT_BRANCH. Uploading to Google Sheets..."
-  else
-    log "This is a Pull Request, but not to the default branch.  Skipping upload to Google Sheets."
-  fi
-else
-  log "This is not a Pull Request. Skipping upload to Google Sheets."
-fi
+#   if [ "$PR_BASE_BRANCH" = "$DEFAULT_BRANCH" ]; then
+#     log "This is a Pull Request to the default branch: $DEFAULT_BRANCH. Uploading to Google Sheets..."
+#   else
+#     log "This is a Pull Request, but not to the default branch.  Skipping upload to Google Sheets."
+#   fi
+# else
+#   log "This is not a Pull Request. Skipping upload to Google Sheets."
+# fi
 
