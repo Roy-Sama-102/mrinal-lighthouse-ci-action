@@ -379,6 +379,15 @@ upload_to_google_sheet
 # Set the personal access token (replace `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` with your actual token)
 ACCESS_TOKEN="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"
 
+step "GITHUB_EVENT_NAME"
+log "$GITHUB_EVENT_NAME"
+
+step "DEFAULT_BRANCH"
+log "$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')"
+
+step "PR_BASE_BRANCH"
+log "$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")"
+
 if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
   DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
   PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
