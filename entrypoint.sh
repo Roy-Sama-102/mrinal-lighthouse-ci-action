@@ -447,6 +447,6 @@ pwd
 # PUSH_BODY="{ \"ref\": \"refs/heads/test\", \"sha\": \"$GIT_COMMIT_SHA\" }"
 # PUSH_URL="https://api.github.com/repos/$YOUR_GITHUB_USERNAME/$YOUR_REPO_NAME/git/refs/heads/test"
 
-curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
+# curl -X POST -H "Content-Type: application/json" -H "$AUTH_HEADER" -d "$PUSH_BODY" "$PUSH_URL"
 
 
