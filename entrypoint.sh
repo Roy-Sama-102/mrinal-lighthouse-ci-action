@@ -199,7 +199,7 @@ min_score_accessibility="${LHCI_MIN_SCORE_ACCESSIBILITY:-0.9}"
 cat <<- EOF > lighthouserc.yml
 ci:
   collect:
-    numberOfRuns: 3
+    numberOfRuns: 1
     url:
       - "$host/$query_string"
       - "$host/products/$product_handle$query_string"
@@ -290,6 +290,8 @@ extract_json_data() {
             page_type="Collection Page"
         elif [[ $file == *"products"* ]]; then
             page_type="Product Page"
+	    json_data=$(cat "$file")
+     	    log "PDP Reports: $json_data"
         else
             page_type="Homepage"
         fi
