@@ -272,14 +272,12 @@ extract_json_data() {
     if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
         event_info="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/pull/$pull_request_number"
 
-	 # Extract pull request title from GITHUB_REF
-	pull_request_title=$(basename "$GITHUB_REF")
-	
-	# Replace underscores with spaces
-	pull_request_title=${pull_request_title//_/ }
+	# Extract the pull request title from the GitHub event
+	pull_request_title="${{ github.event.pull_request.title }}"
 	
 	# Print the pull request title
 	log "Pull Request Title: $pull_request_title"
+ 	log "Actor: $actor"
     else
         event_info="Event Name: $GITHUB_EVENT_NAME, Action URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
     fi
