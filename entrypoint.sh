@@ -299,8 +299,6 @@ extract_json_data() {
             page_type="Collection Page"
         elif [[ $file == *"products"* ]]; then
             page_type="Product Page"
-	    json_data=$(cat "$file")
-     	    log "PDP Reports: $json_data"
         else
             page_type="Homepage"
         fi
