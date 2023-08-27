@@ -381,7 +381,7 @@ upload_to_google_sheet() {
 	    log "This is a Pull Request to the default branch: $DEFAULT_BRANCH. Uploading to Google Sheets..."
      	    log "Sheet url: https://docs.google.com/spreadsheets/d/1kcA7iPXsEuzktgTpmcstz1ylUm5znWKx0X5eaPP_R3c"
 	  
-     	    curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycbyhNkaO6iU2giTez9a4llx_aJ9qQfW-NX_MuKjF6PfDTIhkxfqP6TvdkIf11104Cpb9/exec"
+     	    curl -X POST -H "Content-Type: application/json" -d "$json_object" "https://script.google.com/macros/s/AKfycby1whEleElTOHg_axVIgPX-8FOcbafn-V2QFVI_LVMWsz6S3mR9cBvbPR4M7apwNtKJ/exec"
 	  else
 	    log "This is a Pull Request, but not to the default branch.  Skipping upload to Google Sheets."
 	  fi
